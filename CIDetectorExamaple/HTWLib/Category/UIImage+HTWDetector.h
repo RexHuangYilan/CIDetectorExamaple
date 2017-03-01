@@ -19,9 +19,9 @@ typedef NS_ENUM(NSUInteger, HTWFeatureType) {
 
 
 /*
- 辦識圖片
- type:辦識的種類
- block:辦識完成後回傳
+ 辨識圖片
+ type:辨識的種類
+ block:辨識完成後回傳
  */
 -(void)featureOfType:(HTWFeatureType)type block:(void(^ _Nullable)(NSArray<CIFeature *> * _Nonnull features,CIImage * _Nonnull cimage))block;
 
