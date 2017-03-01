@@ -1,4 +1,4 @@
-# CIDetectorExamaple
+# 圖形辨識小程式
 
 練習用CIDetector寫一個圖形辨識小程式
 包含:
