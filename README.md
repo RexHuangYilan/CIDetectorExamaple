@@ -2,7 +2,7 @@
 
 
 
-* ## 圖形辨識
+## 圖形辨識
 
 `UIImage+HTWDetector.h`
 辨識圖片的擴充
@@ -18,15 +18,15 @@ typedef NS_ENUM(NSUInteger, HTWFeatureType) {
 ```
 圖形辨識步驟:
 
-1. 建立原生辨識元件
+* 建立原生辨識元件
 ```objectivec
 	CIDetector *detector = [CIDetector detectorOfType:[self featureWithType:type] context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyHigh}];
 ```
-2. 將UIImage轉換為CIImage
+* 將UIImage轉換為CIImage
 ```objectivec
 	CIImage *image = [[CIImage alloc] initWithImage:self];
 ```
-3. 其實就是這一行指令在作圖形辨識(這會很花時間喔)
+* 其實就是這一行指令在作圖形辨識(這會很花時間喔)
 ```objectivec
 	NSArray *features = [detector featuresInImage:image];
 ```
@@ -81,7 +81,7 @@ UIImage *temp = [UIImage imageNamed:@"star4"];	//載入圖片
 ```
 </br>
 </br>
-* ## 座標轉換
+## 座標轉換
 `UIImage+HTWDetector.h`
 CIImage 座標轉換為 UIImageView 的對應座標
 由於CIImage的座標與UIImageView的座標是上下相反，需要轉換，所以對`CIImage`擴充了一個`category`，新增`property`
