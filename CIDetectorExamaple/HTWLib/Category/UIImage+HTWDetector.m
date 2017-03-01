@@ -14,6 +14,7 @@
 {
     CIDetector *detector = [CIDetector detectorOfType:[self featureWithType:type] context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyHigh}];
     CIImage *image = [[CIImage alloc] initWithImage:self];
+    //使用副線程
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *features;
         if (type == HTWFeatureTypeFace) {
@@ -32,7 +33,7 @@
         }else{
             features = [detector featuresInImage:image];
         }
-        
+        //回到主線程
         dispatch_async(dispatch_get_main_queue(), ^{
             if (block) {
                 block(features,image);
