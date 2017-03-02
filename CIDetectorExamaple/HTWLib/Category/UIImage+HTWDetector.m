@@ -12,8 +12,11 @@
 
 -(void)featureOfType:(HTWFeatureType)type block:(void(^ _Nullable)(NSArray<CIFeature *> * _Nonnull features,CIImage * _Nonnull cimage))block
 {
+    //建立辨識元件
     CIDetector *detector = [CIDetector detectorOfType:[self featureWithType:type] context:nil options:@{CIDetectorAccuracy:CIDetectorAccuracyHigh}];
+    //轉換為CIImage
     CIImage *image = [[CIImage alloc] initWithImage:self];
+    //使用副線程，不會主線程會塞住
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSArray *features;
         if (type == HTWFeatureTypeFace) {
@@ -32,7 +35,7 @@
         }else{
             features = [detector featuresInImage:image];
         }
-        
+        //回到主線程，使畫面更新
         dispatch_async(dispatch_get_main_queue(), ^{
             if (block) {
                 block(features,image);
@@ -93,8 +96,11 @@
 
 -(CGAffineTransform)toImageTransform
 {
+    //取得圖片大小
     CGSize ciImageSize = self.extent.size;
+    //上下相反
     CGAffineTransform transform = CGAffineTransformMakeScale(1, -1);
+    //對y軸作延伸，長度為原圖高度
     transform = CGAffineTransformTranslate(transform, 0, -ciImageSize.height);
     return transform;
 }

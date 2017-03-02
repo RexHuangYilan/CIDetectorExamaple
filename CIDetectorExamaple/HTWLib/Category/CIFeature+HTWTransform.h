@@ -30,7 +30,7 @@
 @interface CIRectangleFeature(HTWTransform)
 
 /*
- 取得辦識區塊的圖片
+ 取得辨識區塊的圖片
  image:原始的圖片
  view:父層的UIImageView
  */
